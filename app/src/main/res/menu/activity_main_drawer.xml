@@ -4,21 +4,21 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/RegistrarCiudadano"
+            android:id="@+id/RegistrarCiudadanosNav"
             android:icon="@drawable/ic_menu_camera"
             android:title="Registro Ciudadano" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/ListadoRegistrosNav"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Gallery" />
+            android:title="Listado Registros" />
         <item
-            android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="Slideshow" />
+            android:title="Informacion"
+            android:id="@+id/InformacionNav" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/SalirNav"
             android:icon="@drawable/ic_menu_manage"
-            android:title="Tools" />
+            android:title="Salir" />
     </group>
 
 </menu>
