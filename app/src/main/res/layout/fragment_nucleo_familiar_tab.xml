@@ -1,13 +1,41 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.papay.tallerencuestas.NucleoFamiliarTab">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/txtNombreIntegranteNucleo"
+        android:hint="Nombres" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/txtFechaNacimientoNucleo"
+        android:hint="Fecha de Nacimiento" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/comboParentescoNucleo" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="340dp"
+        android:id="@+id/listaNucleoFamiliar" />
+
+    <Button
+        android:text="Registrar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
-
-</FrameLayout>
+        android:id="@+id/btnRegistrarNucleo" />
+</LinearLayout>
