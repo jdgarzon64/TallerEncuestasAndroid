@@ -17,16 +17,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.io.File;
+
+import modelo.InformacionLaboral;
 
 
 public class InformacionLaboralTab extends Fragment {
     EditText txtNombreEmpresaInfoLaboral;
+    EditText txtDireccionEmpresaInfoLaboral;
+    EditText txtSalarioInfoLaboral;
     View view;
     ImageView imvFotoEmpresaInfoLaboral;
     Button btnFotoInfoLaboral;
-Spinner comboCargoInfoLaboral;
+    Button btnRegistrarInfoLaboral;
+    Spinner comboCargoInfoLaboral;
+    String dirFoto;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +47,8 @@ Spinner comboCargoInfoLaboral;
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_informacion_laboral_tab, container, false);
         txtNombreEmpresaInfoLaboral = view.findViewById(R.id.txtNombreEmpresaInfoLaboral);
+        txtDireccionEmpresaInfoLaboral = view.findViewById(R.id.txtDireccionEmpresaInfoLaboral);
+        txtSalarioInfoLaboral = view.findViewById(R.id.txtSalarioInfoLaboral);
         comboCargoInfoLaboral = view.findViewById(R.id.comboCargoInfoLaboral);
         imvFotoEmpresaInfoLaboral = view.findViewById(R.id.imvFotoEmpresaInfoLaboral);
         imvFotoEmpresaInfoLaboral.setOnClickListener(new View.OnClickListener() {
@@ -55,8 +65,15 @@ Spinner comboCargoInfoLaboral;
                 recuperarFoto(getView());
             }
         });
+        btnRegistrarInfoLaboral = view.findViewById(R.id.btnRegistrarInfoLaboral);
+        btnRegistrarInfoLaboral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registrarInfoLab();
+            }
+        });
 
-cargarCombos();
+        cargarCombos();
 
         return view;
     }
@@ -67,7 +84,7 @@ cargarCombos();
         File foto = new File(getActivity().getExternalFilesDir(null), txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg");
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(foto));
         startActivity(intent);
-        String dir = getActivity().getExternalFilesDir(null) + "/" + txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg";
+        dirFoto = getActivity().getExternalFilesDir(null) + "/" + txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg";
 
         startActivity(intent);
 
@@ -79,11 +96,29 @@ cargarCombos();
         imvFotoEmpresaInfoLaboral.setImageBitmap(bitmap1);
     }
 
-    public void cargarCombos(){
-        String[] opciones1 = { "Seleccione una opcion", "Programador","QA","Project Manager"};
+    public void cargarCombos() {
+        String[] opciones1 = {"Seleccione una opcion", "Programador", "QA", "Project Manager"};
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, opciones1);
         comboCargoInfoLaboral.setAdapter(adapter1);
+    }
+
+    public void registrarInfoLab() {
+        if (txtNombreEmpresaInfoLaboral.getText().toString().isEmpty() ||
+                txtDireccionEmpresaInfoLaboral.getText().toString().isEmpty() ||
+                txtSalarioInfoLaboral.getText().toString().isEmpty() ||
+                comboCargoInfoLaboral.getSelectedItemPosition() == 0) {
+            Toast.makeText(getActivity(), "debe llenar todos los campos", Toast.LENGTH_LONG).show();
+        } else if (dirFoto != null) {
+            String empresa = txtNombreEmpresaInfoLaboral.getText().toString();
+            String direccion = txtDireccionEmpresaInfoLaboral.getText().toString();
+            String salario = txtSalarioInfoLaboral.getText().toString();
+            String cargo = comboCargoInfoLaboral.getSelectedItem().toString();
+
+            InformacionLaboral informacionLaboral = new InformacionLaboral(empresa, direccion, salario, cargo, dirFoto);
+
+
+        }
     }
 }
