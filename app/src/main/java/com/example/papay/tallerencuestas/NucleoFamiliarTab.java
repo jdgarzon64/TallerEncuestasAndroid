@@ -1,14 +1,18 @@
 package com.example.papay.tallerencuestas;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.icu.util.Calendar;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -51,6 +55,31 @@ public class NucleoFamiliarTab extends Fragment {
             }
         });
         cargarCombos();
+        txtFechaNacimientoNucleo.setOnTouchListener(new View.OnTouchListener() {
+
+                                                        @Override
+                                                        public boolean onTouch(View v, MotionEvent event) {
+
+                                                            if (event.getAction() == MotionEvent.ACTION_UP) {
+
+                                                                int cyear = 2018;
+                                                                int cmonth = 3;
+                                                                int cday = 22;
+                                                                DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+                                                                    @Override
+                                                                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                                                                        txtFechaNacimientoNucleo.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+                                                                    }
+                                                                }, cyear, cmonth, cday);
+                                                                datePickerDialog.show();
+                                                            }
+
+                                                            return true;
+
+                                                        }
+                                                    }
+
+        );
         return view;
     }
 
@@ -72,7 +101,7 @@ public class NucleoFamiliarTab extends Fragment {
             String fecha = txtFechaNacimientoNucleo.getText().toString();
             String parentesco = comboParentescoNucleo.getSelectedItem().toString();
 
-            Familiar familiar = new Familiar(nombre,parentesco,fecha);
+            Familiar familiar = new Familiar(nombre, parentesco, fecha);
         }
     }
 }
