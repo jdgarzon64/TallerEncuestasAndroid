@@ -27,10 +27,14 @@ public class InformacionNav extends Fragment {
     Button btnFotoProyecto;
     View view;
     EditText txtNombreProyectoInformacion;
+    EditText txtNombreInformacion;
+    EditText txtApellidosInformacion;
+    EditText txtCorreoElectronico;
     ImageView imvFotoProyecto;
     static final int CAMERA = 3;
     static final int READSD = 4;
-    String dir="";
+    String dir = "";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +57,9 @@ public class InformacionNav extends Fragment {
             }
         });
         txtNombreProyectoInformacion = view.findViewById(R.id.txtNombreProyectoInformacion);
+        txtNombreInformacion = view.findViewById(R.id.txtNombreInformacion);
+        txtApellidosInformacion = view.findViewById(R.id.txtApellidosInformacion);
+        txtCorreoElectronico = view.findViewById(R.id.txtCorreoElectronico);
         imvFotoProyecto = view.findViewById(R.id.imvFotoProyecto);
         imvFotoProyecto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +81,18 @@ public class InformacionNav extends Fragment {
                 askForPermission(android.Manifest.permission.CAMERA, CAMERA);
             }
 
-            if(ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                 dir = getActivity().getExternalFilesDir(null) + "/" + txtNombreProyectoInformacion.getText().toString() + ".jpg";
+                dir = getActivity().getExternalFilesDir(null) + "/" + txtNombreProyectoInformacion.getText().toString() + ".jpg";
+                MainActivity.encuestador.setDireccionFoto(dir);
+                MainActivity.encuestador.setEmail(txtCorreoElectronico.getText().toString());
+                MainActivity.encuestador.setNombre(txtNombreInformacion.getText().toString());
+                MainActivity.profileName.setText(txtNombreInformacion.getText().toString());
+                MainActivity.profileCorreo.setText(txtCorreoElectronico.getText().toString());
+
                 File foto = new File(getActivity().getExternalFilesDir(null), txtNombreProyectoInformacion.getText().toString() + ".jpg");
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(foto));
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
             }
         }
     }
@@ -88,6 +101,7 @@ public class InformacionNav extends Fragment {
 
         Bitmap bitmap1 = BitmapFactory.decodeFile(dir);
         imvFotoProyecto.setImageBitmap(bitmap1);
+        MainActivity.profileProyecto.setImageBitmap(bitmap1);
     }
 
     public void askForPermission(String permit, int requestCode) {
@@ -104,6 +118,7 @@ public class InformacionNav extends Fragment {
             }
         }
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         recuperarFoto(getView());

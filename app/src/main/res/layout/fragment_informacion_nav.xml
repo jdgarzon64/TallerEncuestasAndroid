@@ -15,7 +15,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/txtNombreInformacion"
-        android:hint="Nombres" />
+        android:hint="Nombres"
+        android:layout_marginTop="80dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -52,5 +53,6 @@
         android:layout_height="wrap_content"
         app:srcCompat="@mipmap/ic_launcher"
         android:layout_weight="0.29"
-        android:id="@+id/imvFotoProyecto" />
+        android:id="@+id/imvFotoProyecto"
+        android:layout_marginTop="-10dp" />
 </LinearLayout>

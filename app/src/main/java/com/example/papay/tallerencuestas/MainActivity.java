@@ -26,10 +26,12 @@ import modelo.Encuestador;
 import modelo.InformacionBasica;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
-
-    public static Encuestador encuestador=new Encuestador("Invitado","","Invitado@hotmail.com");
-    public static int indexCiudadano=0;
+        implements NavigationView.OnNavigationItemSelectedListener {
+    public static TextView profileName;
+    public static TextView profileCorreo;
+    public static Encuestador encuestador = new Encuestador("Invitado", "", "Invitado@hotmail.com");
+    public static int indexCiudadano = 0;
+    public static ImageView profileProyecto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,26 +64,23 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        if (encuestador.getListadoCiudadanos().size()<1)
-        encuestador.getListadoCiudadanos().add(new Ciudadano(new InformacionBasica(" "," ","12/17/2018","1","2","3","4"),null,null));
-
         cargarInfoEncuestador();
         return true;
     }
 
-    public void cargarInfoEncuestador(){
-
-
-        TextView profileName = (TextView) this.findViewById(R.id.NombreUsuarioPerfil);
-        TextView profileCorreo = (TextView) this.findViewById(R.id.CorreoUsuarioPerfil);
-        ImageView profileProyecto = (ImageView) this.findViewById(R.id.ImagenPerfil);
-
-
-
+    public void cargarInfoEncuestador() {
+        encuestador.getListadoCiudadanos().add(new Ciudadano(new InformacionBasica("hola", "prueba", "12/17/2018", "1", "2", "3", "4"), null, null));
+        encuestador.getListadoCiudadanos().add(new Ciudadano(new InformacionBasica("kkas", "dsgds", "12/17/2018", "1", "2", "3", "4"), null, null));
+         profileName = (TextView) this.findViewById(R.id.NombreUsuarioPerfil);
+         profileCorreo = (TextView) this.findViewById(R.id.CorreoUsuarioPerfil);
+         profileProyecto = (ImageView) this.findViewById(R.id.ImagenPerfil);
+        profileName.setText(encuestador.getNombre());
+        profileCorreo.setText(encuestador.getEmail());
+        Bitmap bitmap1 = BitmapFactory.decodeFile(encuestador.getDireccionFoto());
+        profileProyecto.setImageBitmap(bitmap1);
         if (encuestador != null) {
             profileName.setText(encuestador.getNombre());
             profileCorreo.setText(encuestador.getEmail());
-            Bitmap bitmap1 = BitmapFactory.decodeFile(encuestador.getDireccionFoto());
             //profileProyecto.setText(user.getProyecto());
         }
     }
@@ -108,7 +107,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         FragmentManager fragmentManager = getSupportFragmentManager();
         if (id == R.id.RegistrarCiudadanosNav) {
-            MainActivity.indexCiudadano=0;
             fragmentManager.beginTransaction().replace(R.id.content_main, new RegistrarCiudadanosNav()).commit();
         } else if (id == R.id.ListadoRegistrosNav) {
             fragmentManager.beginTransaction().replace(R.id.content_main, new ListadoRegistrosNav()).commit();
