@@ -15,7 +15,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/txtNombreEmpresaInfoLaboral"
-        android:hint="Nombre de la Empresa" />
+        android:hint="Nombre de la Empresa"
+        android:layout_marginTop="130dp" />
 
     <EditText
         android:layout_width="match_parent"

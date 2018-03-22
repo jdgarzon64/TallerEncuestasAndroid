@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.papay.tallerencuestas.InformacionBasicaTab">
+    tools:context="com.example.papay.tallerencuestas.InformacionBasicaTab"
+    android:weightSum="1">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -13,7 +14,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/txtNombreInfoBasica"
-        android:hint="Nombre" />
+        android:hint="Nombre"
+        android:layout_marginTop="100dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -60,28 +62,28 @@
 
     <RadioGroup
         android:layout_width="match_parent"
-        android:layout_height="156dp"
-        android:id="@+id/rbgGeneroInfoBasica" >
+        android:id="@+id/rbgGeneroInfoBasica"
+        android:layout_height="110dp">
 
         <RadioButton
             android:text="Masculino"
-            android:layout_width="match_parent"
+            android:layout_width="109dp"
             android:layout_height="wrap_content"
-            android:id="@+id/rbtnMasculinoInfoBasica"
-            android:layout_weight="1" />
+            android:id="@+id/rbtnMasculinoInfoBasica" />
 
         <RadioButton
             android:text="Femenino"
-            android:layout_width="match_parent"
+            android:layout_width="108dp"
             android:layout_height="wrap_content"
-            android:id="@+id/rbtnFemeninoInfoBasica"
-            android:layout_weight="1" />
+            android:id="@+id/rbtnFemeninoInfoBasica" />
 
         <RadioButton
             android:text="Otro"
-            android:layout_width="match_parent"
+            android:layout_width="99dp"
             android:layout_height="53dp"
-            android:id="@+id/rbtnOtroInfoBasica" />
+            android:id="@+id/rbtnOtroInfoBasica"
+            android:layout_marginLeft="200dp"
+            android:layout_marginTop="-60dp" />
 
     </RadioGroup>
 
@@ -89,8 +91,7 @@
         android:text="Registrar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnGuardarInfoBasica"
-        android:layout_weight="0.05" />
+        android:id="@+id/btnGuardarInfoBasica" />
 
 
 </LinearLayout>

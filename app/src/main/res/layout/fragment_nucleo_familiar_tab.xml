@@ -13,7 +13,8 @@
         android:inputType="textPersonName"
         android:ems="10"
         android:id="@+id/txtNombreIntegranteNucleo"
-        android:hint="Nombres" />
+        android:hint="Nombres"
+        android:layout_marginTop="130dp" />
 
     <EditText
         android:layout_width="match_parent"
@@ -30,12 +31,12 @@
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="340dp"
-        android:id="@+id/listaNucleoFamiliar" />
+        android:id="@+id/listaNucleoFamiliar"
+        android:layout_height="180dp" />
 
     <Button
         android:text="Registrar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="50dp"
         android:id="@+id/btnRegistrarNucleo" />
 </LinearLayout>
