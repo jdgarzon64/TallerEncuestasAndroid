@@ -62,6 +62,11 @@ View view;
 
 
     }
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        appBar.removeView(tabs);
+    }
     public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
         String[] tituloTabs = {"Informacion Basica", "Nucleo Familiar", "Informacion Laboral"};
