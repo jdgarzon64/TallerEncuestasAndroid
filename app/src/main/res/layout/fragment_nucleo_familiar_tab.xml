@@ -3,40 +3,41 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="110dp"
     tools:context="com.example.papay.tallerencuestas.NucleoFamiliarTab">
 
     <!-- TODO: Update blank fragment layout -->
 
     <EditText
+        android:id="@+id/txtNombreIntegranteNucleo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/txtNombreIntegranteNucleo"
         android:hint="Nombres"
-        android:layout_marginTop="130dp" />
+        android:inputType="textPersonName" />
 
     <EditText
+        android:id="@+id/txtFechaNacimientoNucleo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
         android:ems="10"
-        android:id="@+id/txtFechaNacimientoNucleo"
-        android:hint="Fecha de Nacimiento" />
+        android:hint="Fecha de Nacimiento"
+        android:inputType="textPersonName" />
 
     <Spinner
+        android:id="@+id/comboParentescoNucleo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/comboParentescoNucleo" />
+        android:layout_height="wrap_content" />
 
     <ListView
-        android:layout_width="match_parent"
         android:id="@+id/listaNucleoFamiliar"
+        android:layout_width="match_parent"
         android:layout_height="180dp" />
 
     <Button
-        android:text="Registrar"
+        android:id="@+id/btnRegistrarNucleo"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/btnRegistrarNucleo" />
+        android:layout_height="wrap_content"
+
+        android:text="Registrar" />
 </LinearLayout>

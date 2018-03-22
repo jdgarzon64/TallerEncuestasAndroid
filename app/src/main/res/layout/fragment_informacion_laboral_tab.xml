@@ -1,60 +1,85 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingTop="110dp"
     tools:context="com.example.papay.tallerencuestas.InformacionLaboralTab">
 
     <!-- TODO: Update blank fragment layout -->
 
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/txtNombreEmpresaInfoLaboral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtDireccionEmpresaInfoLaboral"
+        android:ems="10"
         android:hint="Nombre de la Empresa"
-        android:layout_marginTop="130dp" />
+        android:inputType="textPersonName" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/txtDireccionEmpresaInfoLaboral"
-        android:hint="Direccion" />
-
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:ems="10"
+        android:hint="Direccion"
+        android:inputType="textPersonName" />
+
+    <EditText
         android:id="@+id/txtSalarioInfoLaboral"
-        android:hint="Salario" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtNombreEmpresaInfoLaboral"
+        android:ems="10"
+        android:hint="Salario"
+        android:inputType="textPersonName" />
 
     <Spinner
+        android:id="@+id/comboCargoInfoLaboral"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/comboCargoInfoLaboral" />
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtSalarioInfoLaboral" />
 
     <ImageView
+        android:id="@+id/imvFotoEmpresaInfoLaboral"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@mipmap/ic_launcher"
-        android:id="@+id/imvFotoEmpresaInfoLaboral" />
+        android:layout_height="100dp"
+        android:layout_above="@+id/btnFotoInfoLaboral"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/comboCargoInfoLaboral"
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <Button
+        android:id="@+id/btnFotoInfoLaboral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Tomar Foto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnFotoInfoLaboral" />
+
+        android:layout_above="@+id/btnRegistrarInfoLaboral"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
-        android:text="Registrar"
+        android:id="@+id/btnRegistrarInfoLaboral"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnRegistrarInfoLaboral" />
+        android:background="#F57C00"
+        android:textColor="#ffffff"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:text="Registrar" />
 
-</LinearLayout>
+</RelativeLayout>

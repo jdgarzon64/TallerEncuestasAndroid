@@ -38,4 +38,9 @@ public class Familiar {
     public void setParentesco(String parentesco) {
         this.parentesco = parentesco;
     }
+
+    @Override
+    public String toString() {
+        return "Nombre: "+nombre+"\nParentesco: "+parentesco;
+    }
 }

@@ -10,9 +10,13 @@ public class NucleoFamiliar {
 
     public ArrayList<Familiar>listaFamiliares;
 
+
     public NucleoFamiliar() {
 
         this.listaFamiliares=new ArrayList<>();
     }
 
+    public ArrayList<Familiar> getListaFamiliares() {
+        return listaFamiliares;
+    }
 }

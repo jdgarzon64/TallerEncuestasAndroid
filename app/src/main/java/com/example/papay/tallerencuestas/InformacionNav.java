@@ -37,6 +37,7 @@ public class InformacionNav extends Fragment {
         // recuperarFoto(getView());
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

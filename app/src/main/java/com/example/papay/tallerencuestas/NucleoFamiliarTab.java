@@ -18,6 +18,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import Dao.EncuestadorDAO;
+import modelo.Ciudadano;
 import modelo.Familiar;
 import modelo.NucleoFamiliar;
 
@@ -30,6 +32,7 @@ public class NucleoFamiliarTab extends Fragment {
     EditText txtFechaNacimientoNucleo;
     ListView listaNucleoFamiliar;
     Button btnRegistrarNucleo;
+    EncuestadorDAO dao;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,7 +44,7 @@ public class NucleoFamiliarTab extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
+        dao = new EncuestadorDAO();
         view = inflater.inflate(R.layout.fragment_nucleo_familiar_tab, container, false);
         comboParentescoNucleo = view.findViewById(R.id.comboParentescoNucleo);
         txtNombreIntegranteNucleo = view.findViewById(R.id.txtNombreIntegranteNucleo);
@@ -55,6 +58,7 @@ public class NucleoFamiliarTab extends Fragment {
             }
         });
         cargarCombos();
+        cargarLista();
         txtFechaNacimientoNucleo.setOnTouchListener(new View.OnTouchListener() {
 
                                                         @Override
@@ -83,6 +87,21 @@ public class NucleoFamiliarTab extends Fragment {
         return view;
     }
 
+    public void cargarLista(){
+        if(MainActivity.indexCiudadano!=0) {
+            if (MainActivity.encuestador.getListadoCiudadanos().get(MainActivity.indexCiudadano).getNucleoFamiliar().getListaFamiliares().size() > 0) {
+                Toast.makeText(getContext(), "Cargando Lista de familiares", Toast.LENGTH_SHORT)
+                        .show();
+                ArrayAdapter<Familiar> adapter = new ArrayAdapter<Familiar>(getContext(),
+                        android.R.layout.simple_list_item_1, MainActivity.encuestador.getListadoCiudadanos().get(MainActivity.indexCiudadano).getNucleoFamiliar().getListaFamiliares());
+                listaNucleoFamiliar.setAdapter(adapter);
+            } else {
+                Toast.makeText(getContext(), "No tiene Registros", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
+
     public void cargarCombos() {
         String[] opciones1 = {"Seleccione una opcion", "Madre", "Padre", "Abuela"};
 
@@ -102,6 +121,15 @@ public class NucleoFamiliarTab extends Fragment {
             String parentesco = comboParentescoNucleo.getSelectedItem().toString();
 
             Familiar familiar = new Familiar(nombre, parentesco, fecha);
+            Boolean res =dao.guardarFamiliar(familiar);
+            if (res){
+                Toast.makeText(getActivity(), "Registro el familiar con exito!!", Toast.LENGTH_LONG).show();
+                cargarLista();
+            }else{
+                Toast.makeText(getActivity(), "Ocurrio un error al registrar!", Toast.LENGTH_LONG).show();
+
+            }
+
         }
     }
 }

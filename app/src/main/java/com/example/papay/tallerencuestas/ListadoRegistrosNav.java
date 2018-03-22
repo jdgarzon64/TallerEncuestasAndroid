@@ -40,59 +40,60 @@ public class ListadoRegistrosNav extends Fragment {
     }
 
 
+    public void cargarListaRegistros() {
 
-    public void cargarListaRegistros(){
 
-
-        Toast.makeText(getContext(), "No tiene Registros"+ MainActivity.encuestador.getListadoCiudadanos().size(), Toast.LENGTH_SHORT)
+        Toast.makeText(getContext(), "No tiene Registros" + MainActivity.encuestador.getListadoCiudadanos().size(), Toast.LENGTH_SHORT)
                 .show();
-            if (MainActivity.encuestador.getListadoCiudadanos().size() > 0) {
-                Toast.makeText(getContext(), "Entro al if", Toast.LENGTH_SHORT)
-                        .show();
-                ArrayAdapter<Ciudadano> adapter = new ArrayAdapter<Ciudadano>( getContext(),
-                        android.R.layout.simple_list_item_1, MainActivity.encuestador.getListadoCiudadanos());
-                list.setAdapter(adapter);
-                list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        if (MainActivity.encuestador.getListadoCiudadanos().size() > 0) {
+            Toast.makeText(getContext(), "Entro al if", Toast.LENGTH_SHORT)
+                    .show();
+            ArrayAdapter<Ciudadano> adapter = new ArrayAdapter<Ciudadano>(getContext(),
+                    android.R.layout.simple_list_item_1, MainActivity.encuestador.getListadoCiudadanos());
+            list.setAdapter(adapter);
+            list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    if (position > 0) {
                         MainActivity.indexCiudadano = position;
                         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                         fragmentManager.beginTransaction().replace(R.id.content_main, new RegistrarCiudadanosNav()).commit();
-
                     }
-                });
-                list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long id) {
-                   new AlertDialog.Builder(getContext())
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .setTitle("Eliminar Ciudadano")
-                        .setMessage("¿Quieres eliminar este Ciudadano?")
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                        {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
 
-                                MainActivity.encuestador.getListadoCiudadanos().remove(position);
-                                cargarListaRegistros();
-                            }
-                        })
-                        .setNegativeButton("No", null)
-                        .show();
+                }
+            });
+            list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> adapterView, View view, final int position, long id) {
+                    if (position > 0) {
+                        new AlertDialog.Builder(getContext())
+                                .setIcon(android.R.drawable.ic_dialog_alert)
+                                .setTitle("Eliminar Ciudadano")
+                                .setMessage("¿Quieres eliminar este Ciudadano?")
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        MainActivity.encuestador.getListadoCiudadanos().remove(position);
+                                        cargarListaRegistros();
+                                    }
+                                })
+                                .setNegativeButton("No", null)
+                                .show();
                         Toast.makeText(getContext(), "ADFFADD", Toast.LENGTH_SHORT)
                                 .show();
                         return true;
                     }
-                });
+                    return true;
+                }
+            });
 
-            } else {
-                Toast.makeText(getContext(), "No tiene Registros", Toast.LENGTH_SHORT)
-                        .show();
-            }
+        } else {
+            Toast.makeText(getContext(), "No tiene Registros", Toast.LENGTH_SHORT)
+                    .show();
+        }
 
     }
-
 
 
 }

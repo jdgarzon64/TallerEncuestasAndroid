@@ -43,6 +43,6 @@ public class Ciudadano {
 
     @Override
     public String toString() {
-        return informacionBasica.nombre;
+        return ""+informacionBasica.nombre+" "+""+informacionBasica.apellido;
     }
 }

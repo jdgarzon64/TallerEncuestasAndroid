@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import java.io.File;
 
+import Dao.EncuestadorDAO;
 import modelo.InformacionLaboral;
 
 
@@ -37,6 +38,7 @@ public class InformacionLaboralTab extends Fragment {
     Button btnRegistrarInfoLaboral;
     Spinner comboCargoInfoLaboral;
     String dirFoto;
+    EncuestadorDAO dao;
     static final int CAMERA = 3;
     static final int READSD = 4;
 
@@ -51,6 +53,7 @@ public class InformacionLaboralTab extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_informacion_laboral_tab, container, false);
+        dao = new EncuestadorDAO();
         txtNombreEmpresaInfoLaboral = view.findViewById(R.id.txtNombreEmpresaInfoLaboral);
         txtDireccionEmpresaInfoLaboral = view.findViewById(R.id.txtDireccionEmpresaInfoLaboral);
         txtSalarioInfoLaboral = view.findViewById(R.id.txtSalarioInfoLaboral);
@@ -67,7 +70,7 @@ public class InformacionLaboralTab extends Fragment {
             @Override
             public void onClick(View view) {
                 tomarFoto(getView());
-                recuperarFoto(getView());
+               // recuperarFoto(getView());
             }
         });
         btnRegistrarInfoLaboral = view.findViewById(R.id.btnRegistrarInfoLaboral);
@@ -79,8 +82,21 @@ public class InformacionLaboralTab extends Fragment {
         });
 
         cargarCombos();
-
+        settributos();
+        recuperarFoto(view);
         return view;
+    }
+
+    public void settributos() {
+        if (MainActivity.indexCiudadano != 0 && MainActivity.encuestador.getListadoCiudadanos().get(MainActivity.indexCiudadano).getInformacionLaboral()!=null) {
+
+
+            txtNombreEmpresaInfoLaboral.setText(MainActivity.encuestador.getListadoCiudadanos().get(MainActivity.indexCiudadano).getInformacionLaboral().getNombreEmpresa());
+            txtDireccionEmpresaInfoLaboral.setText(MainActivity.encuestador.getListadoCiudadanos().get(MainActivity.indexCiudadano).getInformacionLaboral().getDireccion());
+            txtSalarioInfoLaboral.setText(MainActivity.encuestador.getListadoCiudadanos().get(MainActivity.indexCiudadano).getInformacionLaboral().getSalario());
+            comboCargoInfoLaboral.setSelection(1);
+
+        }
     }
 
     public void tomarFoto(View view) {
@@ -88,17 +104,22 @@ public class InformacionLaboralTab extends Fragment {
         if (txtNombreEmpresaInfoLaboral.getText().toString().isEmpty()) {
             Toast.makeText(getActivity(), "debe llenar todos los campos", Toast.LENGTH_LONG).show();
         } else {
-
-            if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(getActivity(), "entro al else", Toast.LENGTH_LONG).show();
+            if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 askForPermission(android.Manifest.permission.CAMERA, CAMERA);
             }
 
-            if(ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+            if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                dirFoto = getActivity().getExternalFilesDir(null) + "/" + txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg";
+
+
+
                 File foto = new File(getActivity().getExternalFilesDir(null), txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg");
+
+                dirFoto = getActivity().getExternalFilesDir(null) + "/" + txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg";
+
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(foto));
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
             }
         }
     }
@@ -130,10 +151,16 @@ public class InformacionLaboralTab extends Fragment {
             String cargo = comboCargoInfoLaboral.getSelectedItem().toString();
 
             InformacionLaboral informacionLaboral = new InformacionLaboral(empresa, direccion, salario, cargo, dirFoto);
-
+            Boolean res = dao.guardarInformacionLaboral(informacionLaboral);
+            if (res) {
+                Toast.makeText(getActivity(), "Guardo con exito!!", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(getActivity(), "Ha ocurrido un error!!", Toast.LENGTH_LONG).show();
+            }
 
         }
     }
+
     public void askForPermission(String permit, int requestCode) {
 
         if (ContextCompat.checkSelfPermission(getActivity(), permit) !=

@@ -48,8 +48,8 @@ View view;
 
         tabs = new TabLayout(getActivity());
 
-        tabs.setTabTextColors(Color.parseColor("#FFFFFF"),Color.parseColor("#000000"));
-
+        tabs.setTabTextColors(Color.parseColor("#FFFFFF"),Color.parseColor("#FFFFFF"));
+tabs.setSelectedTabIndicatorColor(Color.parseColor("#FFFFFF"));
         appBar.addView(tabs);
 
         viewPager = (ViewPager) view.findViewById(R.id.pager);

@@ -1,97 +1,131 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="false"
     android:orientation="vertical"
-    tools:context="com.example.papay.tallerencuestas.InformacionBasicaTab"
-    android:weightSum="1">
+    android:paddingTop="100dp"
+    android:weightSum="1"
+    tools:context="com.example.papay.tallerencuestas.InformacionBasicaTab">
 
     <!-- TODO: Update blank fragment layout -->
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/txtNombreInfoBasica"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="55dp"
+        android:ems="10"
         android:hint="Nombre"
-        android:layout_marginTop="100dp" />
+        android:inputType="textPersonName" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/txtApellidoInfoBasica"
-        android:hint="Apellidos" />
-
-    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="14dp"
         android:ems="10"
+        android:hint="Apellidos"
+        android:inputType="textPersonName" />
+
+    <EditText
         android:id="@+id/txtFechaNacimientoInfoBasica"
-        android:hint="Fecha de Nacimiento" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ComboTipoDocumentoInfoBasica"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:hint="Fecha de Nacimiento"
+        android:inputType="textPersonName" />
 
     <Spinner
+        android:id="@+id/ComboTipoDocumentoInfoBasica"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/ComboTipoDocumentoInfoBasica" />
+        android:layout_height="20dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtNombreInfoBasica" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/txtDocumentoInfoBasica"
-        android:hint="Numero de Documento" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtFechaNacimientoInfoBasica"
+        android:ems="10"
+        android:hint="Numero de Documento"
+        android:inputType="textPersonName" />
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
         android:id="@+id/txtNumeroTelefonoInfoBasica"
-        android:hint="Numero de Telefono" />
-
-    <TextView
-        android:text="Genero"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvGeneroInfoBasica" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtDocumentoInfoBasica"
+        android:ems="10"
+        android:hint="Numero de Telefono"
+        android:inputType="textPersonName" />
 
     <RadioGroup
-        android:layout_width="match_parent"
         android:id="@+id/rbgGeneroInfoBasica"
-        android:layout_height="110dp">
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        android:gravity="start"
+        android:orientation="vertical"
+        android:layout_marginTop="11dp"
+        android:layout_below="@+id/txtNumeroTelefonoInfoBasica"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
         <RadioButton
-            android:text="Masculino"
-            android:layout_width="109dp"
+            android:id="@+id/rbtnMasculinoInfoBasica"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rbtnMasculinoInfoBasica" />
+            android:layout_above="@+id/view_below"
+            android:layout_marginBottom="20dp"
+            android:orientation="horizontal"
+            android:text="Masculino" />
 
         <RadioButton
-            android:text="Femenino"
-            android:layout_width="108dp"
+            android:id="@+id/rbtnFemeninoInfoBasica"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/rbtnFemeninoInfoBasica" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/txtNombreInfoBasica"
+            android:layout_marginTop="30dp"
+            android:layout_weight="1"
+            android:text="Femenino" />
 
         <RadioButton
             android:id="@+id/rbtnOtroInfoBasica"
-            android:layout_width="99dp"
-            android:layout_height="53dp"
-            android:layout_marginLeft="200dp"
-            android:layout_marginTop="-60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-70dp"
             android:text="Otro" />
 
     </RadioGroup>
 
     <Button
-        android:text="Registrar"
+        android:id="@+id/btnGuardarInfoBasica"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnGuardarInfoBasica" />
+        android:text="Registrar"
+        android:layout_marginTop="77dp"
+
+        android:layout_below="@+id/rbgGeneroInfoBasica"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
-</LinearLayout>
+</RelativeLayout>
