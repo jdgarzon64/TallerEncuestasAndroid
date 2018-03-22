@@ -12,9 +12,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import java.io.File;
 
@@ -24,7 +26,7 @@ public class InformacionLaboralTab extends Fragment {
     View view;
     ImageView imvFotoEmpresaInfoLaboral;
     Button btnFotoInfoLaboral;
-
+Spinner comboCargoInfoLaboral;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class InformacionLaboralTab extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_informacion_laboral_tab, container, false);
         txtNombreEmpresaInfoLaboral = view.findViewById(R.id.txtNombreEmpresaInfoLaboral);
+        comboCargoInfoLaboral = view.findViewById(R.id.comboCargoInfoLaboral);
         imvFotoEmpresaInfoLaboral = view.findViewById(R.id.imvFotoEmpresaInfoLaboral);
         imvFotoEmpresaInfoLaboral.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +56,7 @@ public class InformacionLaboralTab extends Fragment {
             }
         });
 
+cargarCombos();
 
         return view;
     }
@@ -73,5 +77,13 @@ public class InformacionLaboralTab extends Fragment {
 
         Bitmap bitmap1 = BitmapFactory.decodeFile(getActivity().getExternalFilesDir(null) + "/" + txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg");
         imvFotoEmpresaInfoLaboral.setImageBitmap(bitmap1);
+    }
+
+    public void cargarCombos(){
+        String[] opciones1 = { "Seleccione una opcion", "Programador","QA","Project Manager"};
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, opciones1);
+        comboCargoInfoLaboral.setAdapter(adapter1);
     }
 }
