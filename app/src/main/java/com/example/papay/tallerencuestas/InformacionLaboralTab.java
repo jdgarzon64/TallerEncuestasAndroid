@@ -26,7 +26,7 @@ public class InformacionLaboralTab extends Fragment {
     View view;
     ImageView imvFotoEmpresaInfoLaboral;
     Button btnFotoInfoLaboral;
-Spinner comboCargoInfoLaboral;
+    Spinner comboCargoInfoLaboral;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

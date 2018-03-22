@@ -19,6 +19,14 @@ public class Encuestador {
         listadoCiudadanos= new ArrayList<>();
     }
 
+    public ArrayList<Ciudadano> getListadoCiudadanos() {
+        return listadoCiudadanos;
+    }
+
+    public void setListadoCiudadanos(ArrayList<Ciudadano> listadoCiudadanos) {
+        this.listadoCiudadanos = listadoCiudadanos;
+    }
+
     public String getDireccionFoto() {
         return direccionFoto;
     }

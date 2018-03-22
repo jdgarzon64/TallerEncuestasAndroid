@@ -78,12 +78,12 @@
             android:id="@+id/rbtnFemeninoInfoBasica" />
 
         <RadioButton
-            android:text="Otro"
+            android:id="@+id/rbtnOtroInfoBasica"
             android:layout_width="99dp"
             android:layout_height="53dp"
-            android:id="@+id/rbtnOtroInfoBasica"
             android:layout_marginLeft="200dp"
-            android:layout_marginTop="-60dp" />
+            android:layout_marginTop="-60dp"
+            android:text="Otro" />
 
     </RadioGroup>
 

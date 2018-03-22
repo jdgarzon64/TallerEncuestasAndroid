@@ -14,9 +14,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+
+import modelo.Ciudadano;
+import modelo.Encuestador;
+import modelo.InformacionBasica;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
+
+    public static Encuestador encuestador=new Encuestador("Invitado","","Invitado@hotmail.com");
+    public static int indexCiudadano=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +60,24 @@ public class MainActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        cargarInfoEncuestador();
         return true;
+    }
+
+    public void cargarInfoEncuestador(){
+        encuestador.getListadoCiudadanos().add(new Ciudadano(new InformacionBasica("hola","prueba","12/17/2018","1","2","3","4"),null,null));
+        encuestador.getListadoCiudadanos().add(new Ciudadano(new InformacionBasica("kkas","dsgds","12/17/2018","1","2","3","4"),null,null));
+        TextView profileName = (TextView) this.findViewById(R.id.NombreUsuarioPerfil);
+        TextView profileCorreo = (TextView) this.findViewById(R.id.CorreoUsuarioPerfil);
+        ImageView profileProyecto = (ImageView) this.findViewById(R.id.ImagenPerfil);
+
+
+
+        if (encuestador != null) {
+            profileName.setText(encuestador.getNombre());
+            profileCorreo.setText(encuestador.getEmail());
+            //profileProyecto.setText(user.getProyecto());
+        }
     }
 
     @Override

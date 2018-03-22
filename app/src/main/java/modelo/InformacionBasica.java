@@ -78,4 +78,6 @@ public class InformacionBasica {
     public void setGenero(String genero) {
         this.genero = genero;
     }
+
+
 }

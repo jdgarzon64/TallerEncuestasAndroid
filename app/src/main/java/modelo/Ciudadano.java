@@ -5,14 +5,16 @@ package modelo;
  */
 
 public class Ciudadano {
-    public InformacionBasica informacionBasica;
-    public InformacionLaboral informacionLaboral;
-    public NucleoFamiliar nucleoFamiliar;
+
+    private InformacionBasica informacionBasica;
+    private InformacionLaboral informacionLaboral;
+    private NucleoFamiliar nucleoFamiliar;
 
     public Ciudadano(InformacionBasica informacionBasica, InformacionLaboral informacionLaboral, NucleoFamiliar nucleoFamiliar) {
         this.informacionBasica = informacionBasica;
         this.informacionLaboral = informacionLaboral;
         this.nucleoFamiliar = nucleoFamiliar;
+
     }
 
     public InformacionBasica getInformacionBasica() {
@@ -37,5 +39,10 @@ public class Ciudadano {
 
     public void setNucleoFamiliar(NucleoFamiliar nucleoFamiliar) {
         this.nucleoFamiliar = nucleoFamiliar;
+    }
+
+    @Override
+    public String toString() {
+        return informacionBasica.nombre;
     }
 }
