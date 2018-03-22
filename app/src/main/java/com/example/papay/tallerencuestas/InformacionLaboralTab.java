@@ -2,13 +2,16 @@ package com.example.papay.tallerencuestas;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +37,8 @@ public class InformacionLaboralTab extends Fragment {
     Button btnRegistrarInfoLaboral;
     Spinner comboCargoInfoLaboral;
     String dirFoto;
+    static final int CAMERA = 3;
+    static final int READSD = 4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -79,15 +84,23 @@ public class InformacionLaboralTab extends Fragment {
     }
 
     public void tomarFoto(View view) {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        String filePath = Environment.getExternalStorageDirectory() + txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg";
-        File foto = new File(getActivity().getExternalFilesDir(null), txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg");
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(foto));
-        startActivity(intent);
-        dirFoto = getActivity().getExternalFilesDir(null) + "/" + txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg";
 
-        startActivity(intent);
+        if (txtNombreEmpresaInfoLaboral.getText().toString().isEmpty()) {
+            Toast.makeText(getActivity(), "debe llenar todos los campos", Toast.LENGTH_LONG).show();
+        } else {
 
+            if (ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                askForPermission(android.Manifest.permission.CAMERA, CAMERA);
+            }
+
+            if(ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                dirFoto = getActivity().getExternalFilesDir(null) + "/" + txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg";
+                File foto = new File(getActivity().getExternalFilesDir(null), txtNombreEmpresaInfoLaboral.getText().toString() + ".jpg");
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(foto));
+                startActivityForResult(intent,1);
+            }
+        }
     }
 
     public void recuperarFoto(View view) {
@@ -120,5 +133,24 @@ public class InformacionLaboralTab extends Fragment {
 
 
         }
+    }
+    public void askForPermission(String permit, int requestCode) {
+
+        if (ContextCompat.checkSelfPermission(getActivity(), permit) !=
+                PackageManager.PERMISSION_GRANTED) {
+
+            if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(), permit)) {
+
+                ActivityCompat.requestPermissions(getActivity(), new String[]{permit}, requestCode);
+            } else {
+                ActivityCompat.requestPermissions(getActivity(), new String[]{permit}, requestCode);
+
+            }
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        recuperarFoto(getView());
     }
 }
